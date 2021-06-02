@@ -19,7 +19,7 @@ socket.on('connect', () => {
     socket.emit('enterChat', user, (resp) => {
 
         console.log('User Connected', resp);
-
+        renderUsers(resp);
     });
 });
 
@@ -37,12 +37,13 @@ socket.on('disconnect', () => {
 
 //Listen data
 socket.on('createMessage', (resp) => {
-    console.log('Sevidor:', resp);
+    renderMessages(resp);
 });
 
 //When user in or out of room
 socket.on('listUsers', (resp) => {
-    console.log(resp)
+    console.log(resp);
+    renderUsers(resp);
 })
 
 //Private message

@@ -25,12 +25,13 @@ io.on('connection', (client) => {
 
     });
 
-    client.on('createMessage', (data) => {
-
+    client.on('createMessage', (data, callback) => {
         let user = users.getUser(client.id);
 
         let message = createMessage(user.name, data.message);
         client.broadcast.to(user.room).emit('createMessage', message);
+
+        callback(message);
     });
 
     client.on('disconnect', () => {
