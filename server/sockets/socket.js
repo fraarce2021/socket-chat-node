@@ -20,6 +20,7 @@ io.on('connection', (client) => {
         users.addUsers(client.id, data.name, data.room);
 
         client.broadcast.to(data.room).emit('listUsers', users.getUsersChatRoom(data.room));
+        client.broadcast.to(data.room).emit('createMessage', createMessage('Administrator', `${data.name} join chat`));
 
         callback(users.getUsersChatRoom(data.room));
 
@@ -30,7 +31,6 @@ io.on('connection', (client) => {
 
         let message = createMessage(user.name, data.message);
         client.broadcast.to(user.room).emit('createMessage', message);
-
         callback(message);
     });
 

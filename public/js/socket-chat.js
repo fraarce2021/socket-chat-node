@@ -37,13 +37,14 @@ socket.on('disconnect', () => {
 
 //Listen data
 socket.on('createMessage', (resp) => {
-    renderMessages(resp);
+    renderMessages(resp, false);
+    scrollBottom();
 });
 
 //When user in or out of room
 socket.on('listUsers', (resp) => {
-    console.log(resp);
     renderUsers(resp);
+
 })
 
 //Private message
